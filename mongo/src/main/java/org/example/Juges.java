@@ -23,7 +23,7 @@ import java.util.List;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
-public class juge {
+public class Juges {
     private MongoDatabase database;
     private String dbName = "tournoisDB";
     private String hostName = "localhost";
@@ -34,23 +34,23 @@ public class juge {
 
 //    private String colCollectionName = "colInscrits";
 
-    private String jugesFilePath = "C:\\Users\\18117\\Desktop\\coursMIAGE\\SGBD\\mongoProjetTournois\\jsonDossier\\";
+    private String jugesFilePath = "C:\\Users\\18117\\Desktop\\Githubbbb\\nosqlProjetMongoOracle\\nosqlMongoAndOracle\\jsonDossier\\";
 
-    private String jugesCsvFileName = "juge.csv";
-    private String jugesJsonArrayFileName = "juge.json";
-    private String destJugesCsvFileName = "juge_out.csv";
+    private String jugesCsvFileName = "juges.csv";
+    private String jugesJsonArrayFileName = "juges.json";
+    private String destJugesCsvFileName = "juges_out.csv";
 
     public static void main(String[] args) {
         // Press Alt+Entrée with your caret at the highlighted text to see how
         // IntelliJ IDEA suggests fixing it.
         System.out.printf("Hello and welcome to Mongotest!");
         try{
-            juge juges=new juge();
+            Juges juges=new Juges();
             juges.dropCollectionJuges(juges.jugesCollectionName);
             juges.createCollectionJuges(juges.jugesCollectionName);
             juges.deleteJuges(juges.jugesCollectionName,new Document());
 
-            juges.testInsertOneJuges();
+            juges.testInsertOneJuge();
             juges.testInsertManyJuges();
 
             juges.loadJugesFromJsonArrayFile(
@@ -58,7 +58,7 @@ public class juge {
                 juges.jugesFilePath,
                 juges.jugesJsonArrayFileName
             );
-//afficher tous les toirnois sans tri ni projection
+//afficher tous les Juges sans tri ni projection
             juges.getJuges(
                 juges.jugesCollectionName,
                 new Document(),
@@ -67,8 +67,8 @@ public class juge {
             );
             juges.updateJuges(
                 juges.jugesCollectionName,
-                new Document("id_juges","20"),
-                new Document ("$set",new Document("nom_t", "Trampoline Spring").append("date_t", "03/02/2023").append("adresse_t", " Lille stade").append("organisateur_t", "OPO-586")),
+                new Document("id_j","5"),
+                new Document ("$set",new Document("id_p", "856").append("note", 5)),
                 new UpdateOptions()
             );
             juges.deleteJuges(juges.jugesCollectionName, new Document("id_juges", 20));
@@ -85,7 +85,7 @@ public class juge {
      * - Création d'un utilisateur appelé
      * - Chargement du pointeur vers la base RH
      */
-    juge() {
+    Juges() {
         // Creating a Mongo juges
         MongoClient mongoClient = new MongoClient(hostName, port);
         // Creating Credentials
@@ -123,7 +123,7 @@ public class juge {
     /**
      * FC4 : Cette fonction permet d'insérer un juges dans une collection.
      */
-    public void insertOneJuges(String nomCollection, Document juges) {
+    public void insertOneJuge(String nomCollection, Document juges) {
         //Drop a collection
         MongoCollection<Document> colJuges = database.getCollection(nomCollection);
         colJuges.insertOne(juges);
@@ -132,9 +132,9 @@ public class juge {
     /**
      * FC5 : Cette fonction permet de tester la méthode Juges.
      */
-    public void testInsertOneJuges() {
-        Document juges = new Document("id_juges", "20").append("nom_t", "Bond Trampoline").append("date_t", "03/02/2022").append("adresse_t", "Paris Fitness").append("organisateur_t", "PPP-331");
-        this.insertOneJuges(this.jugesCollectionName, juges);
+    public void testInsertOneJuge() {
+        Document juges = new Document("id_j", "5").append("id_p", "1005").append("note", 8);
+        this.insertOneJuge(this.jugesCollectionName, juges);
         System.out.println("Document inserted successfully");
     }
     /**
@@ -151,10 +151,9 @@ public class juge {
      */
     public void testInsertManyJuges() {
         List<Document> juges = Arrays.asList(
-                new Document("id_juges", "21").append("nom_t", "Trampoline Spring").append("date_t", "03/02/2022").append("adresse_t", "Allée de la Chapelle Saint-Pierre").append("organisateur_t", "APA-586"),
-                new Document("id_juges", "22").append("nom_t", "Trampoline Summer").append("date_t", "03/06/2022").append("adresse_t", "Allée de la Chapelle Saint-Pierr").append("organisateur_t", "SPA-331"),
-                new Document("id_juges", "23").append("nom_t", "Trampoline Automn").append("date_t", "03/09/2022").append("adresse_t", "Paris Fitness").append("organisateur_t", "APP-331"),
-                new Document("id_juges", "24").append("nom_t", "Trampoline Winter").append("date_t", "03/011/2022").append("adresse_t", "Paris Fitness").append("organisateur_t", "HJG-685")
+                new Document("id_j", "5").append("id_p", "1007").append("note", 8),
+                new Document("id_j", "5").append("id_p", "1008").append("note", 8.6),
+                new Document("id_j", "5").append("id_p", "1009").append("note", 9.8)
                 );
         this.insertManyJuges(this.jugesCollectionName, juges);
     }

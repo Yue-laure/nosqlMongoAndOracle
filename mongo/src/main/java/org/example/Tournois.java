@@ -35,7 +35,7 @@ public class Tournois {
     private String tournoisCollectionName = "colTournois";
     private String colCollectionName = "colInscrits";
 
-    private String tournoisFilePath = "C:\\Users\\18117\\Desktop\\coursMIAGE\\SGBD\\mongoProjetTournois\\jsonDossier\\";
+    private String tournoisFilePath = "C:\\Users\\18117\\Desktop\\Githubbbb\\nosqlProjetMongoOracle\\nosqlMongoAndOracle\\jsonDossier\\";
 
     private String tournoisCsvFileName = "tournois.csv";
     private String tournoisJsonArrayFileName = "tournois.json";
@@ -73,6 +73,7 @@ public class Tournois {
                     new UpdateOptions()
             );
             tournois.deleteTournois(tournois.tournoisCollectionName, new Document("id_tournois", 20));
+
         }catch (Exception e) {
             e.printStackTrace();
         }

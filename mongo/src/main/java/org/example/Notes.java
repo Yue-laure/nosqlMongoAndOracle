@@ -50,7 +50,7 @@ public class Notes {
             notes.createCollectionNotes(notes.notesCollectionName);
             notes.deleteNotes(notes.notesCollectionName,new Document());
 
-            notes.testInsertOneNotes();
+            notes.testInsertOneNote();
             notes.testInsertManyNotes();
 
             notes.loadNotesFromJsonArrayFile(
@@ -71,7 +71,7 @@ public class Notes {
                 new Document ("$set",new Document("id_p", 3).append("id_t", 10).append("note",8)),
                 new UpdateOptions()
             );
-            notes.deleteNotes(notes.notesCollectionName, new Document("id_notes", 20));
+            notes.deleteNotes(notes.notesCollectionName, new Document("id_j", 2023));
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,7 +123,7 @@ public class Notes {
     /**
      * FC4 : Cette fonction permet d'insérer un notes dans une collection.
      */
-    public void insertOneNotes(String nomCollection, Document notes) {
+    public void insertOneNote(String nomCollection, Document notes) {
         //Drop a collection
         MongoCollection<Document> colNotes = database.getCollection(nomCollection);
         colNotes.insertOne(notes);
@@ -132,9 +132,9 @@ public class Notes {
     /**
      * FC5 : Cette fonction permet de tester la méthode Notes.
      */
-    public void testInsertOneNotes() {
-        Document notes = new Document("id_j", 2000).append("id_p", 2000).append("id_t", 10).append("note",8);
-        this.insertOneNotes(this.notesCollectionName, notes);
+    public void testInsertOneNote() {
+        Document notes = new Document("id_j", 2000).append("id_p", 2000).append("id_t", 10).append("note",8.5);
+        this.insertOneNote(this.notesCollectionName, notes);
         System.out.println("Document inserted successfully");
     }
     /**

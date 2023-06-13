@@ -67,11 +67,11 @@ public class Juges {
             );
             juges.updateJuges(
                 juges.jugesCollectionName,
-                new Document("id_j","5"),
-                new Document ("$set",new Document("id_p", "856").append("note", 5)),
+                new Document("id_juge",5),
+                new Document ("$set",new Document("id_t", 8)),
                 new UpdateOptions()
             );
-            juges.deleteJuges(juges.jugesCollectionName, new Document("id_juges", 20));
+            juges.deleteJuges(juges.jugesCollectionName, new Document("id_juge", 20));
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,7 +133,7 @@ public class Juges {
      * FC5 : Cette fonction permet de tester la méthode Juges.
      */
     public void testInsertOneJuge() {
-        Document juges = new Document("id_j", "5").append("id_p", "1005").append("note", 8);
+        Document juges = new Document("id_juge", 1999).append("id_t", 10);
         this.insertOneJuge(this.jugesCollectionName, juges);
         System.out.println("Document inserted successfully");
     }
@@ -151,9 +151,9 @@ public class Juges {
      */
     public void testInsertManyJuges() {
         List<Document> juges = Arrays.asList(
-                new Document("id_j", "5").append("id_p", "1007").append("note", 8),
-                new Document("id_j", "5").append("id_p", "1008").append("note", 8.6),
-                new Document("id_j", "5").append("id_p", "1009").append("note", 9.8)
+                new Document("id_juge", 2000).append("id_t", 10),
+                new Document("id_juge", 2001).append("id_t", 10),
+                new Document("id_juge", 2002).append("id_t", 10)
                 );
         this.insertManyJuges(this.jugesCollectionName, juges);
     }
@@ -168,7 +168,7 @@ public class Juges {
 
         //BasicDBObject whereQuery = new BasicDBObject();
         Document whereQuery = new Document();
-        whereQuery.put("id_juges", JugesId);
+        whereQuery.put("id_juge", JugesId);
         //DBCursor cursor = colJuges.find(whereQuery);
         FindIterable<Document> listJuges = colJuges.find(whereQuery);
 

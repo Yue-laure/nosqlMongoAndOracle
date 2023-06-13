@@ -65,12 +65,12 @@ public class Tournois {
                     new Document(),
                     new Document()
             );
-             tournois.updateTournois(
-                     tournois.tournoisCollectionName,
-                     new Document("id_tournois",20),
-                     new Document ("$set",new Document("nom_t", "Trampoline Spring").append("date_t", "03/02/2023").append("adresse_t", " Lille stade").append("organisateur_t", "OPO-586")),
-                     new UpdateOptions()
-             );
+            tournois.updateTournois(
+                    tournois.tournoisCollectionName,
+                    new Document("id_tournois","20"),
+                    new Document ("$set",new Document("nom_t", "Trampoline Spring").append("date_t", "03/02/2023").append("adresse_t", " Lille stade").append("organisateur_t", "OPO-586")),
+                    new UpdateOptions()
+            );
             tournois.deleteTournois(tournois.tournoisCollectionName, new Document("id_tournois", 20));
 
         }catch (Exception e) {
@@ -124,7 +124,7 @@ public class Tournois {
     /**
      * FC4 : Cette fonction permet d'insérer un tournois dans une collection.
      */
-    public void insertOneTournoi(String nomCollection, Document tournois) {
+    public void insertOneTournois(String nomCollection, Document tournois) {
         //Drop a collection
         MongoCollection<Document> colTournois = database.getCollection(nomCollection);
         colTournois.insertOne(tournois);
@@ -134,8 +134,8 @@ public class Tournois {
      * FC5 : Cette fonction permet de tester la méthode Tournois.
      */
     public void testInsertOneTournoi() {
-        Document tournois = new Document("id_tournois", 20).append("nom_t", "Bond Trampoline").append("date_t", "03/02/2022").append("adresse_t", "Paris Fitness").append("organisateur_t", "PPP-331");
-        this.insertOneTournoi(this.tournoisCollectionName, tournois);
+        Document tournois = new Document("id_tournois", "20").append("nom_t", "Bond Trampoline").append("date_t", "03/02/2022").append("adresse_t", "Paris Fitness").append("organisateur_t", "PPP-331");
+        this.insertOneTournois(this.tournoisCollectionName, tournois);
         System.out.println("FC5 Document inserted successfully");
     }
     /**
@@ -152,10 +152,10 @@ public class Tournois {
      */
     public void testInsertManyTournois() {
         List<Document> tournois = Arrays.asList(
-                new Document("id_tournois", 21).append("nom_t", "Trampoline Spring").append("date_t", "03/02/2022").append("adresse_t", "Allée de la Chapelle Saint-Pierre").append("organisateur_t", "APA-586"),
-                new Document("id_tournois", 22).append("nom_t", "Trampoline Summer").append("date_t", "03/06/2022").append("adresse_t", "Allée de la Chapelle Saint-Pierr").append("organisateur_t", "SPA-331"),
-                new Document("id_tournois", 23).append("nom_t", "Trampoline Automn").append("date_t", "03/09/2022").append("adresse_t", "Paris Fitness").append("organisateur_t", "APP-331"),
-                new Document("id_tournois", 24).append("nom_t", "Trampoline Winter").append("date_t", "03/011/2022").append("adresse_t", "Paris Fitness").append("organisateur_t", "HJG-685")
+                new Document("id_tournois", "21").append("nom_t", "Trampoline Spring").append("date_t", "03/02/2022").append("adresse_t", "Allée de la Chapelle Saint-Pierre").append("organisateur_t", "APA-586"),
+                new Document("id_tournois", "22").append("nom_t", "Trampoline Summer").append("date_t", "03/06/2022").append("adresse_t", "Allée de la Chapelle Saint-Pierr").append("organisateur_t", "SPA-331"),
+                new Document("id_tournois", "23").append("nom_t", "Trampoline Automn").append("date_t", "03/09/2022").append("adresse_t", "Paris Fitness").append("organisateur_t", "APP-331"),
+                new Document("id_tournois", "24").append("nom_t", "Trampoline Winter").append("date_t", "03/011/2022").append("adresse_t", "Paris Fitness").append("organisateur_t", "HJG-685")
         );
         this.insertManyTournois(this.tournoisCollectionName, tournois);
     }
@@ -173,6 +173,7 @@ public class Tournois {
         whereQuery.put("id_tournois", TournoisId);
         //DBCursor cursor = colTournois.find(whereQuery);
         FindIterable<Document> listTournois = colTournois.find(whereQuery);
+
         // Getting the iterator
         Iterator it = listTournois.iterator();
         while (it.hasNext()) {
@@ -231,22 +232,11 @@ public class Tournois {
         listTournoi = colTournois.find(filters).sort(new Document("_id", 1));
         it = listTournoi.iterator();// Getting the iterator
         this.displayIterator(it, "Dans deleteTournois: avant suppression");
-        this.getTournois(
-                this.tournoisCollectionName,
-                new Document(),
-                new Document(),
-                new Document()
-        );
+
         colTournois.deleteMany(filters);
         listTournoi = colTournois.find(filters).sort(new Document("_id", 1));
         it = listTournoi.iterator();// Getting the iterator
         this.displayIterator(it, "Dans deleteTournois: Apres suppression");
-        this.getTournois(
-                this.tournoisCollectionName,
-                new Document(),
-                new Document(),
-                new Document()
-        );
     }
     /**
      * FC12 : Parcours un itérateur et affiche les documents qui s'y trouvent

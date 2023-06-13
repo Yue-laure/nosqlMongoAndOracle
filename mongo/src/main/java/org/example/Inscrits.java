@@ -48,9 +48,9 @@ public class Inscrits {
             Inscrits inscrits=new Inscrits();
             inscrits.dropCollectionInscrits(inscrits.inscritsCollectionName);
             inscrits.createCollectionInscrits(inscrits.inscritsCollectionName);
-            inscrits.deleteInscrits(inscrits.inscritsCollectionName,new Document());
+//            inscrits.deleteInscrits(inscrits.inscritsCollectionName,new Document());
 
-            inscrits.testInsertOneInscrits();
+            inscrits.testInsertOneInscrit();
             inscrits.testInsertManyInscrits();
 
             inscrits.loadInscritsFromJsonArrayFile(
@@ -71,7 +71,7 @@ public class Inscrits {
                 new Document ("$set",new Document("nom_i", "Loic").append("date_i", "14/07/1995")),
                 new UpdateOptions()
             );
-            inscrits.deleteInscrits(inscrits.inscritsCollectionName, new Document("id_inscrits", 20));
+            inscrits.deleteInscrits(inscrits.inscritsCollectionName, new Document("id_inscrit", 20));
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,8 +132,8 @@ public class Inscrits {
     /**
      * FC5 : Cette fonction permet de tester la méthode Inscrits.
      */
-    public void testInsertOneInscrits() {
-        Document inscrits = new Document("id_j", "5").append("id_p", "1005").append("note", 8);
+    public void testInsertOneInscrit() {
+        Document inscrits = new Document("id_inscrit", 2000).append("nom_i", "GUO").append("prenom_i", "Yue").append("date_i","26/01/1995").append("adresse_i","434 Prairieview Junction");
         this.insertOneInscrit(this.inscritsCollectionName, inscrits);
         System.out.println("Document inserted successfully");
     }
@@ -151,9 +151,10 @@ public class Inscrits {
      */
     public void testInsertManyInscrits() {
         List<Document> inscrits = Arrays.asList(
-                new Document("id_j", "5").append("id_p", "1007").append("note", 8),
-                new Document("id_j", "5").append("id_p", "1008").append("note", 8.6),
-                new Document("id_j", "5").append("id_p", "1009").append("note", 9.8)
+                new Document("id_inscrit", 2000).append("nom_i", "GUO").append("prenom_i", "Yue").append("date_i","26/01/1995").append("adresse_i","434 Prairieview Junction"),
+                new Document("id_inscrit", 2001).append("nom_i", "Loic").append("prenom_i", "Giorgeschi").append("date_i","14/07/1995").append("adresse_i","434 Prairieview Junction"),
+                new Document("id_inscrit", 2002).append("nom_i", "Fanny").append("prenom_i", "Giorgeschi").append("date_i","14/07/1995").append("adresse_i","434 Prairieview Junction"),
+                new Document("id_inscrit", 2003).append("nom_i", "Emma").append("prenom_i", "Giorgeschi").append("date_i","14/07/1995").append("adresse_i","434 Prairieview Junction")
                 );
         this.insertManyInscrits(this.inscritsCollectionName, inscrits);
     }
@@ -168,7 +169,7 @@ public class Inscrits {
 
         //BasicDBObject whereQuery = new BasicDBObject();
         Document whereQuery = new Document();
-        whereQuery.put("id_inscrits", InscritsId);
+        whereQuery.put("id_inscrit", InscritsId);
         //DBCursor cursor = colInscrits.find(whereQuery);
         FindIterable<Document> listInscrits = colInscrits.find(whereQuery);
 

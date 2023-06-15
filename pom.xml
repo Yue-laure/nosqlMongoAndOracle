@@ -33,5 +33,15 @@
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-data-mongodb</artifactId>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>com.oracle.nosql.sdk</groupId>
+            <artifactId>nosqldriver</artifactId>
+            <version>5.3.2</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>oracle-nosql</groupId>-->
+<!--            <artifactId>nosqldb-kv</artifactId>-->
+<!--        </dependency>-->
+
     </dependencies>
 </project>
